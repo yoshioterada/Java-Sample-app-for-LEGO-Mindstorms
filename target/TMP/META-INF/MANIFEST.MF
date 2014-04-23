@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: tyoshio2002
+Build-Jdk: 1.7.0_51
+Class-Path: /home/root/lejos/lib/ev3classes.jar /home/root/lejos/libjn
+ a/usr/share/java/jna.jar
+Created-By: Apache Maven 3.0.5
+Main-Class: com.yoshio3.legomind.EV3Car
+Archiver-Version: Plexus Archiver
+

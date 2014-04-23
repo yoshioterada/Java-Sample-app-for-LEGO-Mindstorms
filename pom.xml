@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.yoshio3</groupId>
+    <artifactId>LEGOMind</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>1.0</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <!--- MANIFEST ファイルを作成するプラグイン -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.yoshio3.legomind.EV3AppMain</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>/home/root/lejos/lib/ev3classes.jar /home/root/lejos/libjna/usr/share/java/jna.jar</Class-Path>
+                        </manifestEntries> 
+                    </archive>
+                </configuration>
+            </plugin>
+            <!--- scp でリモートにコピーするためのプラグイン -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-5</version>
+                <executions>
+                    <execution>
+                        <id>upload-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>upload</goal>
+                        </goals>
+                        <configuration>
+                            <!-- ~/.m2/settings.xml ファイルに記述したログインID、パスワードの参照 --> 
+                            <serverId>ev3-root</serverId>
+                            <url>scp://192.168.1.100/</url>  
+                            <fromDir>${project.basedir}/target</fromDir>  
+                            <includes>*.jar</includes>  
+                            <excludes>*-sources.jar</excludes>  
+                            <toDir>/home/lejos/programs</toDir>  
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>    
+
+    <!-- ローカル・レポジトリにインストールしたファイルへの参照
+    mvn install:install-file 
+        -Dfile=ev3classes.jar 
+        -DgroupId=ev3.classes 
+        -DartifactId=ev3classes 
+        -Dversion=0.8 -Dpackaging=jar
+    -->
+    <dependencies>
+        <dependency>
+            <groupId>ev3.classes</groupId>
+            <artifactId>ev3classes</artifactId>
+            <version>0.8.1</version>
+        </dependency>
+        
+    <!-- ローカル・レポジトリにインストールしたファイルへの参照
+    mvn install:install-file 
+        -Dfile=dbusjava.jar 
+        -DgroupId=ev3.dbus 
+        -DartifactId=dbusjava 
+        -Dversion=0.8 
+        -Dpackaging=jar
+    -->
+        <dependency>
+            <groupId>ev3.dbus</groupId>
+            <artifactId>dbusjava</artifactId>
+            <version>0.8.1</version>
+        </dependency>
+    </dependencies>
+</project>
