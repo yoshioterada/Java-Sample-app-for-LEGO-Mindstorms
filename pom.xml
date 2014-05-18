@@ -8,8 +8,8 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <build>
@@ -52,7 +52,7 @@
                         <configuration>
                             <!-- ~/.m2/settings.xml ファイルに記述したログインID、パスワードの参照 --> 
                             <serverId>ev3-root</serverId>
-                            <url>scp://192.168.1.100/</url>  
+                            <url>scp://192.168.1.101/</url>  
                             <fromDir>${project.basedir}/target</fromDir>  
                             <includes>*.jar</includes>  
                             <excludes>*-sources.jar</excludes>  

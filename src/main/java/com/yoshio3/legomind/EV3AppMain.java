@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.yoshio3.legomind;
 
 import lejos.hardware.BrickFinder;
@@ -57,15 +56,12 @@ public class EV3AppMain {
     // 車輪テスト
     private void forwardLEGO() {
         //タッチセンサー／超音波 センサー共に有効
-        leftMotor.addListener(new MyMortorListener(ursensor, touchSensor));
-        rightMotor.addListener(new MyMortorListener(ursensor, touchSensor));
+        leftMotor.addListener(new MyMortorListener(ursensor, touchSensor, false));
+        rightMotor.addListener(new MyMortorListener(ursensor, touchSensor, true));
 
         // 回転(360°×回転数)
-        leftMotor.rotateTo(360 * 30, true);
-        rightMotor.rotateTo(360 * 30, true);
-
-        leftMotor.waitComplete();
-        rightMotor.waitComplete();
+        leftMotor.forward();
+        rightMotor.forward();
 
     }
 
@@ -73,6 +69,8 @@ public class EV3AppMain {
         EV3 ev3 = (EV3) BrickFinder.getLocal();
         Keys keys = ev3.getKeys();
         keys.waitForAnyPress();
+        leftMotor.stop();
+        rightMotor.stop();
         ursensor.disable();
         System.exit(0);
     }

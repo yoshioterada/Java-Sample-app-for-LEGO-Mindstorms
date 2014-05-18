@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.yoshio3.legomind.sensorImpl;
 
 import lejos.hardware.Button;
@@ -45,7 +44,7 @@ public class EV3TouchSensorImpl implements Runnable {
         while (true) {
             touchMode.fetchSample(data, 0);
             for (float res : data) {
-                if (res == 1.0f) {
+                if (res > 0.5f) {
                     rm.stop();
                     //
                     if (onForward) {
@@ -57,10 +56,9 @@ public class EV3TouchSensorImpl implements Runnable {
                         rm.forward();
                         onForward = true;
                     }
-//                    rm.rotateTo(360, true);
                 }
             }
-            Delay.msDelay(100);
+            Delay.msDelay(1000);
         }
     }
 }

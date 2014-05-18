@@ -1,0 +1,6 @@
+#surefire
+#Sun May 18 20:43:19 WIT 2014
+maven.ext.class.path=/Applications/NetBeans/NetBeans 8.0.app/Contents/Resources/NetBeans/java/maven-nblib/netbeans-eventspy.jar
+user.dir=/Users/tyoshio2002/NetBeansProjects/LEGOMind
+localRepository=/Users/tyoshio2002/.m2/repository
+basedir=/Users/tyoshio2002/NetBeansProjects/LEGOMind

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.yoshio3.legomind;
 
 import com.yoshio3.legomind.sensorImpl.EV3TouchSensorImpl;
@@ -34,11 +33,13 @@ public class MyMortorListener implements RegulatedMotorListener {
     EV3UltrasonicSensor urSensor;
     EV3TouchSensor touchSensor;
     ExecutorService execSvc;
+    boolean isRight;
 
     // タッチセンサー／ 超音波センサー共に有効
-    public MyMortorListener(EV3UltrasonicSensor urSensor, EV3TouchSensor touchSensor) {
+    public MyMortorListener(EV3UltrasonicSensor urSensor, EV3TouchSensor touchSensor, boolean isRight) {
         this.urSensor = urSensor;
         this.touchSensor = touchSensor;
+        this.isRight = isRight;
         execSvc = Executors.newFixedThreadPool(2);
     }
 
@@ -48,7 +49,7 @@ public class MyMortorListener implements RegulatedMotorListener {
             execSvc.execute(new EV3TouchSensorImpl(rm, touchSensor));
         }
         if (urSensor != null) {
-            execSvc.execute(new EV3UltrasonicSensorImpl(rm, urSensor));
+            execSvc.execute(new EV3UltrasonicSensorImpl(rm, urSensor, isRight));
         }
     }
 
