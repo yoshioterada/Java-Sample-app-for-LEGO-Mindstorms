@@ -52,7 +52,7 @@
                         <configuration>
                             <!-- ~/.m2/settings.xml ファイルに記述したログインID、パスワードの参照 --> 
                             <serverId>ev3-root</serverId>
-                            <url>scp://192.168.1.101/</url>  
+                            <url>scp://192.168.1.3/</url>  
                             <fromDir>${project.basedir}/target</fromDir>  
                             <includes>*.jar</includes>  
                             <excludes>*-sources.jar</excludes>  

@@ -61,7 +61,7 @@ public class EV3UltrasonicSensorImpl implements Runnable {
                     Button.LEDPattern(6);
                     //このフラグの実装はちょっと設計がまずい、
                     //当初シングルリスナーで複数のモータを制御しようとした設計をしたため
-                    //現在クラス変数で状態を判定し、処理中は片側を停止する実装となっている。
+                    //現在クラス変数で状態を判定し、処理中は片側を停止する実装といる。
                     if (isRight == true) {
                         isTurnFinished = false;
                         motor.rotate(360 + 80); //90度左回転
